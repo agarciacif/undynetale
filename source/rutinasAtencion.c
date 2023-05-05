@@ -40,7 +40,7 @@ void RutAtencionTempo()
 		if (tick==5)
 		{
 			seg++;
-			iprintf("\x1b[13;5HTiempo transcurrido=%d", seg);
+			iprintf("\x1b[15;5HTiempo transcurrido=%d", seg);
 			tick=0;
 		}
 	}
