@@ -80,27 +80,26 @@ void juego()
 			
 			iprintf("\x1b[08;00HPAUSA");
 			iprintf("\x1b[09;00HPULSA R PARA SEGUIR O START PARA VOLVER AL MENU");
-			if(TeclaDetectada()){
-				if(TeclaPulsada()==R){
-					ESTADO = JUEGO;
-					MostrarPersonaje(ultimaPos);
-					consoleClear();
-					}
-				else if(TeclaPulsada()==START){
-					ESTADO = INICIO;
-					consoleClear();
-					}
-									
-			}			
+			if(TeclaDetectada()){ //POR INTERRUPCION
+				if(TeclaPulsada()==R){ //POR INTERRUPCION
+					ESTADO = JUEGO;  //POR INTERRUPCION
+					MostrarPersonaje(ultimaPos); //POR INTERRUPCION
+					consoleClear(); //POR INTERRUPCION
+					} //POR INTERRUPCION
+				else if(TeclaPulsada()==START){ //POR INTERRUPCION
+					ESTADO = INICIO; //POR INTERRUPCION
+					consoleClear(); //POR INTERRUPCION
+					} //POR INTERRUPCION					
+			}	 //POR INTERRUPCION		
 		}
 		if (ESTADO == MUERTE)
 		{
 			iprintf("\x1b[08;00HHAS MUERTO, PULSA START PARA VOLVER AL MENU");
-			if (TeclaDetectada()&&TeclaPulsada() == START)
-			{
-				ESTADO = INICIO;
-				consoleClear();
-			}
+			if (TeclaDetectada()&&TeclaPulsada() == START) //Por interrupcion
+			{ //POR INTERRUPCION
+				ESTADO = INICIO; //POR INTERRUPCION
+				consoleClear(); //POR INTERRUPCION
+			} //POR INTERRUPCION
 		}
 	}
 }

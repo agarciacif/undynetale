@@ -13,14 +13,34 @@ int ESTADO;
 int seg3;
 
 void RutAtencionTeclado ()
-{
+{	
+
+	if (ESTADO == PAUSA)
+	{
+		if(TeclaPulsada()==R){
+			ESTADO = JUEGO;
+			MostrarPersonaje(ultimaPos);
+			consoleClear();
+		}
+		else if(TeclaPulsada()==START){
+			ESTADO = INICIO;
+			consoleClear();
+		}
+	}
+	
 	if (TeclaPulsada() == START && ESTADO == INICIO)
 	{
 		ESTADO = JUEGO;
 	}
-	if (TeclaPulsada() == SELECT && ESTADO == JUEGO)
+	if (TeclaPulsada() == L && ESTADO == JUEGO)
 	{
 		ESTADO = INICIO;
+	}
+	
+	if (TeclaPulsada() == START && ESTADO == MUERTE)
+	{
+		ESTADO = INICIO;
+		consoleClear();
 	}
 }
 

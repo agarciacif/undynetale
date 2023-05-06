@@ -55,4 +55,4 @@ struct Bala
 };
 extern int ESTADO;
 extern int ultimaPos;
-extern Balas balas[30];
+extern struct Bala balas[30];
