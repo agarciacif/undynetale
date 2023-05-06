@@ -22,30 +22,40 @@ void RutAtencionTeclado ()
 	{
 		ESTADO = INICIO;
 	}
-	
-	
-	
-
-
 }
+
 
 void RutAtencionTempo()
 {
 	static int tick=0;
 	static int seg=0;
-
+	static int posX = 255;
+	static int posY = 95;
 	if (ESTADO==JUEGO)
 	{
 		tick++; 
 		if (tick==5)
 		{
 			seg++;
-			iprintf("\x1b[15;5HTiempo transcurrido=%d", seg);
+			iprintf("\x1b[15;0HTiempo transcurrido=%d", seg);
 			tick=0;
 		}
+		if (seg%5==0)
+		{
+			MostrarProyH(3,posX,posY);
+			posX--;
+			if (ultimaPos == 2 && posX == 145)
+			{
+				posX = 255;
+			}
+			else if(ultimaPos != 2 && posX <= 146){
+				ESTADO = MUERTE;
+				
+			}
+			
+		}
+		
 	}
-	
-	
 }
 
 void EstablecerVectorInt()

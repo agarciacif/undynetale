@@ -16,7 +16,7 @@ int tiempo;
 int seg;
 int X, LIMX, PX;
 int Y, LIMY, PY;
-int tecla, ultimaPos;
+int tecla;
 //int rand;
 void juego()
 {	
@@ -31,77 +31,63 @@ void juego()
 	LIMY = 191;
 	X = 127;
 	Y = 95;
-	ultimaPos = -1; //0: ARRIBA, 1: ABAJO, 2: DERECHA, 3:IZQUIERDA
 	//r = rand() % 4; // [0,4)
 
 	while(1){
-		// if(TeclaDetectada()){ //DEBUG
-		// 	iprintf("\x1b[01;00HTecla pulsada: %d",TeclaPulsada());
-		// 	iprintf("\x1b[02;00HEstado: %d",ESTADO);
-		// }
+		if(TeclaDetectada()){ //DEBUG
+			iprintf("\x1b[01;00HTecla pulsada: %d",TeclaPulsada());
+			iprintf("\x1b[02;00HEstado: %d",ESTADO);
+		}
 		
+
 		if(ESTADO == INICIO){
+			consoleClear();
+			MostrarRomboGrande(1,X,Y);
 			BorrarPersonaje(2,X,Y);			
-			iprintf("\x1b[01;00HESQUIVA LAS BALAS!");
-			iprintf("\x1b[02;00HPULSA LA PANTALLA PARA EMPEZAR");
+			iprintf("\x1b[03;00HESQUIVA LAS BALAS!");
+			iprintf("\x1b[04;00HPULSA LA PANTALLA PARA EMPEZAR");
 			if(tactilTocada()){
 				ESTADO = JUEGO;
 				consoleClear();	
-				MostrarArriba(2,X,Y);
-			}		
+			}
+					
 		}
 
 		if(ESTADO == JUEGO){
-								 
+					
+			BorrarRomboGrande(1,X,Y);			 
 			if(TeclaDetectada()){
-        		if(TeclaPulsada() == ARRIBA){
-            		MostrarPersonaje(0);
-					ultimaPos = 0;
+        		if(TeclaPulsada()  == ARRIBA && Y > 0){
+            			MostrarArriba(2,X,Y);
         		}
-        		else if(TeclaPulsada() == ABAJO){
-					MostrarPersonaje(1);
-					ultimaPos = 1;
+        		else if(TeclaPulsada()== ABAJO && Y < LIMY){
+					MostrarAbajo(2,X,Y);
         		}
-        		else if(TeclaPulsada() == DERECHA){
-					MostrarPersonaje(2);
-					ultimaPos = 2;
+        		else if(TeclaPulsada()== DERECHA && X < LIMX){
+					MostrarDerecha(2,X,Y);        				
 				}
-        		else if(TeclaPulsada() == IZQUIERDA){
-					MostrarPersonaje(3);
-					ultimaPos = 3;
+        		else if(TeclaPulsada()== IZQUIERDA && X>0){
+					MostrarIzquierda(2,X,Y);			        				
 				}
-				else if(TeclaPulsada() == L){ //POR INTERRUPCION
-					ESTADO = PAUSA;			
+			else if(TeclaPulsada()==START){ //POR INTERRUPCION
+					ESTADO = PAUSA;	
+					consoleClear();			
 				}
     		}
-		}
-		
 		if(ESTADO == PAUSA){
 			
-			iprintf("\x1b[08;00HPAUSA");
-			iprintf("\x1b[09;00HPULSA R PARA SEGUIR O START PARA VOLVER AL MENU");
+			iprintf("PAUSA");
 			if(TeclaDetectada()){
-				if(TeclaPulsada()==R){
+				if(TeclaPulsada()==SELECT){
 					ESTADO = JUEGO;
-					MostrarPersonaje(ultimaPos);
-					consoleClear();
 					}
 				else if(TeclaPulsada()==START){
 					ESTADO = INICIO;
-					consoleClear();
 					}
-									
-			}			
-		}
-		if (ESTADO == MUERTE)
-		{
-			iprintf("\x1b[08;00HHAS MUERTO, PULSA START PARA VOLVER AL MENU");
-			if (TeclaDetectada()&&TeclaPulsada() == START)
-			{
-				ESTADO = INICIO;
-				consoleClear();
-			}
-		}
+				consoleClear();					
+				}			
+			}		
+		}	
 	}
 }
 void BorrarPersonaje(int num, int posX, int posY){
@@ -110,30 +96,6 @@ void BorrarPersonaje(int num, int posX, int posY){
 	BorrarDerecha(num,posX,posY);
 	BorrarIzquierda(num,posX,posY);
 }
-
-void MostrarPersonaje(int pos){
-	switch (pos)
-	{
-	case 0:
-		MostrarArriba(2,X,Y);
-		break;
-	
-	case 1:
-		MostrarAbajo(2,X,Y);
-		break;
-
-	case 2:
-		MostrarDerecha(2,X,Y);
-		break;
-
-	case 3:
-		MostrarIzquierda(2,X,Y);
-		break;
-	}
-}
-
-
-
 
 
 
