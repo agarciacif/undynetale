@@ -65,5 +65,5 @@ extern int ESTADO;
  * IZQUIERDA = 3
  */
 extern int ultimaPos;
-extern struct Bala balas[30];
+extern struct Bala balas[5];
 extern int vidasJugador;

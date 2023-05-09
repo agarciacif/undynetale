@@ -11,34 +11,35 @@ rutinasAtencion.c
 
 int ESTADO;
 int seg3;
-extern struct Bala balas[30];
+struct Bala balas[5];
+int vidasJugador;
 void RutAtencionTeclado ()
 {	
 
-	if (ESTADO == PAUSA)
-	{
-		if(TeclaPulsada()==R){
-			ESTADO = JUEGO;
-			MostrarPersonaje(ultimaPos);
-			consoleClear();
-		}
-		else if(TeclaPulsada()==START){
-			ESTADO = INICIO;
-			consoleClear();
-		}
-	}
+	// if (ESTADO == PAUSA)
+	// {
+	// 	if(TeclaPulsada()==R){
+	// 		ESTADO = JUEGO;
+	// 		MostrarPersonaje(ultimaPos);
+	// 		consoleClear();
+	// 	}
+	// 	else if(TeclaPulsada()==START){
+	// 		ESTADO = INICIO;
+	// 		consoleClear();
+	// 	}
+	// }
 	
 
-	if (TeclaPulsada() == L && ESTADO == JUEGO)
-	{
-		ESTADO = PAUSA;
-	}
+	// if (TeclaPulsada() == L && ESTADO == JUEGO)
+	// {
+	// 	ESTADO = PAUSA;
+	// }
 	
-	if (TeclaPulsada() == START && ESTADO == MUERTE)
-	{
-		ESTADO = INICIO;
-		consoleClear();
-	}
+	// if (TeclaPulsada() == START && ESTADO == MUERTE)
+	// {
+	// 	ESTADO = INICIO;
+	// 	consoleClear();
+	// }
 }
 
 
@@ -58,7 +59,7 @@ void RutAtencionTempo()
 		}
 		if (seg%6==0)
 		{
-		while(i<30)
+		while(i<5)
 		{
 			if (balas[i].viva)
 			{
