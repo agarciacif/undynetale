@@ -52,7 +52,7 @@ void juego()
 		}
 
 		if(ESTADO == JUEGO){
-								 
+			vidasJugador = 3;				 
 			if(TeclaDetectada()){
         		if(TeclaPulsada() == ARRIBA){
             		MostrarPersonaje(0);
@@ -128,6 +128,56 @@ void MostrarPersonaje(int pos){
 	case 3:
 		MostrarIzquierda(2,X,Y);
 		break;
+	}
+
+	void dispararBala(){
+		//crea nueva bala en una posición libre
+		int i = 0;
+		int j = 0;
+		
+		while (j < 30)
+		{
+			if (balas[j].viva==0)
+			{
+				i = j;
+				break;
+			}
+			j++;
+		}
+		
+		//elige la ubicación de la nueva bala
+		int random = 0; //rand(4)
+		balas[i].ubi=random;
+		switch (random)
+		{
+		case 0: //Bala arriba
+			balas[i].posX = 127;
+			balas[i].posY = 0;
+			MostrarProyV(i,balas[i].posX,balas[i].posY);
+			break;
+		case 1: //Bala abajo
+			balas[i].posX = 127;
+			balas[i].posY = 191;
+			MostrarProyV(i,balas[i].posX,balas[i].posY);
+			break;
+		case 2: //Bala derecha
+			balas[i].posX = 255;
+			balas[i].posY = 95;
+			MostrarProyH(i,balas[i].posX,balas[i].posY);
+			break;
+		case 3: //Bala izquierda
+			balas[i].posX = 0;
+			balas[i].posY = 95;
+			MostrarProyH(i,balas[i].posX,balas[i].posY);
+			break;
+		default:
+			break;
+		}
+		balas[i].viva = 1;
+		
+		if(i%MAX_BALAS==0){
+			i = 0;
+		}
 	}
 }
 

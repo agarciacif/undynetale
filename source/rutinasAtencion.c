@@ -11,7 +11,7 @@ rutinasAtencion.c
 
 int ESTADO;
 int seg3;
-
+extern struct Bala balas[30];
 void RutAtencionTeclado ()
 {	
 
@@ -28,13 +28,10 @@ void RutAtencionTeclado ()
 		}
 	}
 	
-	if (TeclaPulsada() == START && ESTADO == INICIO)
-	{
-		ESTADO = JUEGO;
-	}
+
 	if (TeclaPulsada() == L && ESTADO == JUEGO)
 	{
-		ESTADO = INICIO;
+		ESTADO = PAUSA;
 	}
 	
 	if (TeclaPulsada() == START && ESTADO == MUERTE)
@@ -49,8 +46,7 @@ void RutAtencionTempo()
 {
 	static int tick=0;
 	static int seg=0;
-	static int posX = 255;
-	static int posY = 95;
+	int i = 0;
 	if (ESTADO==JUEGO)
 	{
 		tick++; 
@@ -60,21 +56,102 @@ void RutAtencionTempo()
 			iprintf("\x1b[15;0HTiempo transcurrido=%d", seg);
 			tick=0;
 		}
-		if (seg%5==0)
+		if (seg%6==0)
 		{
-			MostrarProyH(3,posX,posY);
-			posX--;
-			if (ultimaPos == 2 && posX == 145)
+		while(i<30)
+		{
+			if (balas[i].viva)
 			{
-				posX = 255;
-			}
-			else if(ultimaPos != 2 && posX <= 146){
-				ESTADO = MUERTE;
+				if (balas[i].ubi==0) //ARRIBA -> y++
+				{
+					if (ultimaPos==0 && balas[i].posY==95) //el jugador ha bloqueado el proyectil
+					{
+						balas[i].viva = 0;
+						BorrarProyV(i,balas[i].posX,balas[i].posY);
+					}
+					else if (ultimaPos!=0 && balas[i].posY>=95) //La bala le ha dado al jugador===No estaba bloqueandola
+					{
+						vidasJugador--;
+						balas[i].viva = 0;
+						BorrarProyV(i,balas[i].posX,balas[i].posY);
+					}
+					else //La bala sigue su recorrido
+					{
+						balas[i].posY--;
+						MostrarProyV(i,balas[i].posX,balas[i].posY);	
+					}
+				}
+
+				if (balas[i].ubi==1) //ABAJO -> y--
+				{
+					if (ultimaPos==1 && balas[i].posY==98) //el jugador ha bloqueado el proyectil
+					{
+						balas[i].viva = 0;
+						BorrarProyV(i,balas[i].posX,balas[i].posY);
+					}
+					else if (ultimaPos!=1 && balas[i].posY<=97) //La bala le ha dado al jugador===No estaba bloqueandola
+					{
+						vidasJugador--;
+						balas[i].viva = 0;
+						BorrarProyV(i,balas[i].posX,balas[i].posY);
+					}
+					else //La bala sigue su recorrido
+					{
+						balas[i].posY++;
+						MostrarProyV(i,balas[i].posX,balas[i].posY);	
+					}
+				}
+
+
+				if (balas[i].ubi==2) //DERECHA -> x--
+				{
+
+					if (ultimaPos==2 && balas[i].posX==129) //el jugador ha bloqueado el proyectil
+					{
+						balas[i].viva = 0;
+						BorrarProyH(i,balas[i].posX,balas[i].posY);
+					}
+					else if (ultimaPos!=2 && balas[i].posX<=128) //La bala le ha dado al jugador===No estaba bloqueandola
+					{
+						vidasJugador--;
+						balas[i].viva = 0;
+						BorrarProyH(i,balas[i].posX,balas[i].posY);
+					}
+					else //La bala sigue su recorrido
+					{
+						balas[i].posX--;
+						MostrarProyH(i,balas[i].posX,balas[i].posY);
+					}
+					
+				}
+				if (balas[i].ubi==3) //IZQUIERDA -> x++
+				{
+					if (ultimaPos==3 && balas[i].posX==125) //el jugador ha bloqueado el proyectil
+					{
+						balas[i].viva = 0;
+						BorrarProyH(i,balas[i].posX,balas[i].posY);
+					}
+					else if (ultimaPos!=3 && balas[i].posX >=126) //La bala le ha dado al jugador===No estaba bloqueandola
+					{
+						vidasJugador--;
+						balas[i].viva = 0;
+						BorrarProyH(i,balas[i].posX,balas[i].posY);
+					}
+					else //La bala sigue su recorrido
+					{
+						balas[i].posX++;
+						MostrarProyH(i,balas[i].posX,balas[i].posY);
+					}
+					
+				}
+				
 				
 			}
 			
 		}
-		
+		i++;
+	}
+
 	}
 }
 

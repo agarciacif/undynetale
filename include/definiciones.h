@@ -46,13 +46,24 @@ touchPosition PANT_DAT;
 #define JUEGO 1
 #define MUERTE 2
 #define PAUSA 3
+
+#define MAX_BALAS 7
 struct Bala
 {
-	int i;
-	int ubi;
+	int index;
 	int posX;
 	int posY;
+	int viva;
+	int ubi;
 };
 extern int ESTADO;
+
+/**
+ * ARRIBA = 0
+ * ABAJO = 1
+ * DERECHA = 2
+ * IZQUIERDA = 3
+ */
 extern int ultimaPos;
 extern struct Bala balas[30];
+extern int vidasJugador;
