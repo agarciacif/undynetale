@@ -47,7 +47,13 @@ touchPosition PANT_DAT;
 #define MUERTE 2
 #define PAUSA 3
 
-#define MAX_BALAS 7
+#define MAX_BALAS 1
+#define LIMX 255;
+#define LIMY 191;
+
+
+
+
 struct Bala
 {
 	int index;
@@ -65,5 +71,7 @@ extern int ESTADO;
  * IZQUIERDA = 3
  */
 extern int ultimaPos;
-extern struct Bala balas[5];
+extern struct Bala balas[MAX_BALAS];
 extern int vidasJugador;
+extern int X; //PlayerX
+extern int Y;//PlayerY

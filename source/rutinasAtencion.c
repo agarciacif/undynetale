@@ -11,7 +11,7 @@ rutinasAtencion.c
 
 int ESTADO;
 int seg3;
-struct Bala balas[5];
+struct Bala balas[MAX_BALAS];
 int vidasJugador;
 void RutAtencionTeclado ()
 {	
@@ -48,18 +48,22 @@ void RutAtencionTempo()
 	static int tick=0;
 	static int seg=0;
 	int i = 0;
+	
+	
 	if (ESTADO==JUEGO)
 	{
 		tick++; 
-		if (tick==5)
+		if (tick==10)
 		{
 			seg++;
 			iprintf("\x1b[15;0HTiempo transcurrido=%d", seg);
 			tick=0;
 		}
-		if (seg%6==0)
+		if (seg==20)
 		{
-		while(i<5)
+		seg = 0;
+		//dispararBala();
+		while(i<MAX_BALAS)
 		{
 			if (balas[i].viva)
 			{
@@ -148,10 +152,11 @@ void RutAtencionTempo()
 				
 				
 			}
-			
+			i++;
 		}
-		i++;
+		
 	}
+	
 
 	}
 }
