@@ -47,15 +47,9 @@ touchPosition PANT_DAT;
 #define MUERTE 2
 #define PAUSA 3
 
-#define MAX_BALAS 1
+#define MAX_BALAS 10
 #define LIMX 255;
 #define LIMY 191;
-
-#define POS_ARRIBA 0
-#define POS_ABAJO 1
-#define POS_IZQUIERDA 3
-#define POS_DERECHA 2
-
 
 struct Bala
 {

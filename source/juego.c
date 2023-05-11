@@ -34,13 +34,13 @@ void juego()
 	ultimaPos = -1; //0: ARRIBA, 1: ABAJO, 2: DERECHA, 3:IZQUIERDA
 	i = 0;
 	while(1){
-		  if(TeclaDetectada()){ //DEBUG
-		  	iprintf("\x1b[01;00HTecla pulsada: %d",TeclaPulsada());
-		  	iprintf("\x1b[05;00HEstado: %d",ESTADO);
-			iprintf("\x1b[03;00HUltimaPos: %d",ultimaPos);
-			//iprintf("\x1b[04;00HVidas: %d",vidasJugador);
-			iprintf("\x1b[02;00HposX: %d, posY: %d",X,Y);
-		  }
+		//   if(TeclaDetectada()){ //DEBUG
+		//   	iprintf("\x1b[05;00HTecla pulsada: %d",TeclaPulsada());
+		//   	iprintf("\x1b[06;00HEstado: %d",ESTADO);
+		// 	iprintf("\x1b[07;00HUltimaPos: %d",ultimaPos);
+		// 	//iprintf("\x1b[04;00HVidas: %d",vidasJugador);
+		// 	iprintf("\x1b[08;00HposX: %d, posY: %d",X,Y);
+		//   }
 		
 		if(ESTADO == INICIO){
 			BorrarPersonaje(2,X,Y);			
@@ -52,6 +52,7 @@ void juego()
 				consoleClear();	
 				MostrarPersonaje(0);
 				vidasJugador = 3;
+				iprintf("\x1b[04;00HVidas: %d",vidasJugador);
 				ESTADO = JUEGO;
 			}		
 		}
@@ -59,7 +60,7 @@ void juego()
 		if(ESTADO == JUEGO){
 							 
 			if(TeclaDetectada()){
-        		iprintf("\x1b[04;00HVidas: %d",vidasJugador);
+        		
 				if(TeclaPulsada() == ARRIBA){
             		MostrarPersonaje(ARRIBA);
 					ultimaPos = ARRIBA;
@@ -76,16 +77,16 @@ void juego()
 					MostrarPersonaje(IZQUIERDA);
 					ultimaPos = IZQUIERDA;
 				}
-				else if(TeclaPulsada() == L){ //POR INTERRUPCION
-					ESTADO = PAUSA;	//POR INTERRUPCION		
-				} //POR INTERRUPCION
+				// else if(TeclaPulsada() == L){ //POR INTERRUPCION
+				// 	ESTADO = PAUSA;	//POR INTERRUPCION		
+				// } //POR INTERRUPCION
     		}
 		}
 		
 		if(ESTADO == PAUSA){
 
-			iprintf("\x1b[08;00HPAUSA");
-			iprintf("\x1b[09;00HPULSA R PARA SEGUIR O START PARA VOLVER AL MENU");
+			iprintf("\x1b[015;00HPAUSA");
+			iprintf("\x1b[016;00HPULSA R PARA SEGUIR O START PARA VOLVER AL MENU");
 			if(TeclaDetectada()){ //POR INTERRUPCION
 				if(TeclaPulsada()==R){ //POR INTERRUPCION
 					consoleClear(); //POR INTERRUPCION
@@ -100,7 +101,8 @@ void juego()
 		}
 		if (ESTADO == MUERTE)
 		{
-			iprintf("\x1b[011;00HHAS MUERTO, PULSA START PARA VOLVER AL MENU");
+			iprintf("\x1b[01;00HHAS MUERTO");
+			iprintf("\x1b[02;00HPULSA START PARA VOLVER AL MENU");
 			if (TeclaDetectada()&&TeclaPulsada() == START) //Por interrupcion
 			{ //POR INTERRUPCION
 				consoleClear(); //POR INTERRUPCION

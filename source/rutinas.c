@@ -12,6 +12,7 @@
 #include "fondos.h"
 int X,Y;
 
+struct Bala balas[MAX_BALAS];
 void BorrarPersonaje(int num, int posX, int posY){
 	BorrarArriba(num,posX,posY);
 	BorrarAbajo(num,posX,posY);
@@ -22,20 +23,20 @@ void BorrarPersonaje(int num, int posX, int posY){
 void MostrarPersonaje(int pos){
 	switch (pos)
 	{
-	case 7:
-		MostrarArriba(40, X, Y);
+	case ARRIBA:
+		MostrarArriba(99, X, Y);
 		break;
 	
-	case 6:
-		MostrarAbajo(40, X, Y);
+	case ABAJO:
+		MostrarAbajo(99, X, Y);
 		break;
 
-	case 4:
-		MostrarDerecha(40, X, Y);
+	case DERECHA:
+		MostrarDerecha(99, X, Y);
 		break;
 
-	case 5:
-		MostrarIzquierda(40, X, Y);
+	case IZQUIERDA:
+		MostrarIzquierda(99, X, Y);
 		break;
 	}
 }
@@ -44,6 +45,8 @@ void dispararBala(){
 	//crea nueva bala en una posición libre
 	int i = 0;
 	int j = 0;	
+	
+	int r = rand() % 4;
 	while (j < 30)
 		{
 			if (!balas[j].viva)
@@ -55,26 +58,26 @@ void dispararBala(){
 		}
 	
 	//elige la ubicación de la nueva bala
-	int random = 0 + 4; //TODO: RAND(4) + 4
+	int random = r+4; //TODO: RAND(4) + 4
 	balas[i].ubi=random;
 	switch (random)
 		{
-			case 0: //Bala arriba
+			case ARRIBA: //Bala arriba
 				balas[i].posX = 127;
 				balas[i].posY = 0;
 				MostrarProyV(i,balas[i].posX,balas[i].posY);
 				break;
-			case 1: //Bala abajo
+			case ABAJO: //Bala abajo
 				balas[i].posX = 127;
 				balas[i].posY = 191;
 				MostrarProyV(i,balas[i].posX,balas[i].posY);
 				break;
-			case 2: //Bala derecha
+			case DERECHA: //Bala derecha
 				balas[i].posX = 255;
 				balas[i].posY = 95;
 				MostrarProyH(i,balas[i].posX,balas[i].posY);
 				break;
-			case 3: //Bala izquierda
+			case IZQUIERDA: //Bala izquierda
 				balas[i].posX = 0;
 				balas[i].posY = 95;
 				MostrarProyH(i,balas[i].posX,balas[i].posY);

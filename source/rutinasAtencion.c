@@ -16,7 +16,6 @@ struct Bala balas[MAX_BALAS];
 int vidasJugador;
 void RutAtencionTeclado ()
 {	
-	MostrarRomboGrande(6,30,30);
 	// if (ESTADO == PAUSA)
 	// {
 	// 	if(TeclaPulsada()==R){
@@ -31,10 +30,10 @@ void RutAtencionTeclado ()
 	// }
 	
 
-	// if (TeclaPulsada() == L && ESTADO == JUEGO)
-	// {
-	// 	ESTADO = PAUSA;
-	// }
+	if (TeclaPulsada() == L && ESTADO == JUEGO)
+	{
+		ESTADO = PAUSA;
+	}
 	
 	// if (TeclaPulsada() == START && ESTADO == MUERTE)
 	// {
@@ -67,7 +66,7 @@ void RutAtencionTempo()
 		
 		dispararBala();
 		}
-		for(i = 0; i<MAX_BALAS; i++)
+		for(i = 0; i<MAX_BALAS; i+=2)
 		{
 			if (balas[i].viva)
 			{
@@ -81,6 +80,7 @@ void RutAtencionTempo()
 					else if (ultimaPos!=ARRIBA && balas[i].posY>=90) //La bala le ha dado al jugador===No estaba bloqueandola
 					{
 						vidasJugador--;
+						
 						balas[i].viva = 0;
 						BorrarProyV(i,balas[i].posX,balas[i].posY);
 					}
@@ -100,6 +100,7 @@ void RutAtencionTempo()
 					else if (ultimaPos!=ABAJO && balas[i].posY<=101) //La bala le ha dado al jugador===No estaba bloqueandola
 					{
 						vidasJugador--;
+						
 						balas[i].viva = 0;
 						BorrarProyV(i,balas[i].posX,balas[i].posY);
 					}
@@ -120,6 +121,7 @@ void RutAtencionTempo()
 					else if (ultimaPos!=DERECHA && balas[i].posX<=132) //La bala le ha dado al jugador===No estaba bloqueandola
 					{
 						vidasJugador--;
+						
 						balas[i].viva = 0;
 						BorrarProyH(i,balas[i].posX,balas[i].posY);
 					}
@@ -140,6 +142,7 @@ void RutAtencionTempo()
 					else if (ultimaPos!=IZQUIERDA && balas[i].posX >=120) //La bala le ha dado al jugador===No estaba bloqueandola
 					{
 						vidasJugador--;
+						
 						balas[i].viva = 0;
 						BorrarProyH(i,balas[i].posX,balas[i].posY);
 					}
@@ -150,7 +153,15 @@ void RutAtencionTempo()
 					}
 					
 				}
-				
+				iprintf("\x1b[04;00HVidas: %d",vidasJugador);
+				if (vidasJugador <= 0)
+				{
+					consoleClear();
+					ESTADO = MUERTE;
+				}
+					
+			
+			
 			}
 		}
 	}
