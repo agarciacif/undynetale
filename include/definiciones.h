@@ -51,7 +51,10 @@ touchPosition PANT_DAT;
 #define LIMX 255;
 #define LIMY 191;
 
-
+#define POS_ARRIBA 0
+#define POS_ABAJO 1
+#define POS_IZQUIERDA 3
+#define POS_DERECHA 2
 
 
 struct Bala

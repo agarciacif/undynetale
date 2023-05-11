@@ -9,13 +9,14 @@ rutinasAtencion.c
 #include "fondos.h"
 #include "sprites.h"
 
+
 int ESTADO;
 int seg3;
 struct Bala balas[MAX_BALAS];
 int vidasJugador;
 void RutAtencionTeclado ()
 {	
-
+	MostrarRomboGrande(6,30,30);
 	// if (ESTADO == PAUSA)
 	// {
 	// 	if(TeclaPulsada()==R){
@@ -40,6 +41,7 @@ void RutAtencionTeclado ()
 	// 	ESTADO = INICIO;
 	// 	consoleClear();
 	// }
+
 }
 
 
@@ -47,54 +49,36 @@ void RutAtencionTempo()
 {
 	static int tick=0;
 	static int seg=0;
-	int i = 0;
+	int i;
 	
 	
 	if (ESTADO==JUEGO)
 	{
 		tick++; 
-		if (tick==10)
+		if (tick==5)
 		{
 			seg++;
-			iprintf("\x1b[15;0HTiempo transcurrido=%d", seg);
+			//iprintf("\x1b[15;0HTiempo transcurrido=%d", seg);
 			tick=0;
 		}
 		if (seg==20)
 		{
 		seg = 0;
-		//dispararBala();
-		while(i<MAX_BALAS)
+		
+		dispararBala();
+		}
+		for(i = 0; i<MAX_BALAS; i++)
 		{
 			if (balas[i].viva)
 			{
-				if (balas[i].ubi==0) //ARRIBA -> y++
+				if (balas[i].ubi==ARRIBA) //ARRIBA -> y++
 				{
-					if (ultimaPos==0 && balas[i].posY==95) //el jugador ha bloqueado el proyectil
+					if (ultimaPos==ARRIBA && balas[i].posY==90) //el jugador ha bloqueado el proyectil
 					{
 						balas[i].viva = 0;
 						BorrarProyV(i,balas[i].posX,balas[i].posY);
 					}
-					else if (ultimaPos!=0 && balas[i].posY>=95) //La bala le ha dado al jugador===No estaba bloqueandola
-					{
-						vidasJugador--;
-						balas[i].viva = 0;
-						BorrarProyV(i,balas[i].posX,balas[i].posY);
-					}
-					else //La bala sigue su recorrido
-					{
-						balas[i].posY--;
-						MostrarProyV(i,balas[i].posX,balas[i].posY);	
-					}
-				}
-
-				if (balas[i].ubi==1) //ABAJO -> y--
-				{
-					if (ultimaPos==1 && balas[i].posY==98) //el jugador ha bloqueado el proyectil
-					{
-						balas[i].viva = 0;
-						BorrarProyV(i,balas[i].posX,balas[i].posY);
-					}
-					else if (ultimaPos!=1 && balas[i].posY<=97) //La bala le ha dado al jugador===No estaba bloqueandola
+					else if (ultimaPos!=ARRIBA && balas[i].posY>=90) //La bala le ha dado al jugador===No estaba bloqueandola
 					{
 						vidasJugador--;
 						balas[i].viva = 0;
@@ -106,17 +90,34 @@ void RutAtencionTempo()
 						MostrarProyV(i,balas[i].posX,balas[i].posY);	
 					}
 				}
-
-
-				if (balas[i].ubi==2) //DERECHA -> x--
+				if (balas[i].ubi==ABAJO) //ABAJO -> y--
+				{
+					if (ultimaPos==ABAJO && balas[i].posY==101) //el jugador ha bloqueado el proyectil
+					{
+						balas[i].viva = 0;
+						BorrarProyV(i,balas[i].posX,balas[i].posY);
+					}
+					else if (ultimaPos!=ABAJO && balas[i].posY<=101) //La bala le ha dado al jugador===No estaba bloqueandola
+					{
+						vidasJugador--;
+						balas[i].viva = 0;
+						BorrarProyV(i,balas[i].posX,balas[i].posY);
+					}
+					else //La bala sigue su recorrido
+					{
+						balas[i].posY--;
+						MostrarProyV(i,balas[i].posX,balas[i].posY);	
+					}
+				}
+				if (balas[i].ubi==DERECHA) //DERECHA -> x--
 				{
 
-					if (ultimaPos==2 && balas[i].posX==129) //el jugador ha bloqueado el proyectil
+					if (ultimaPos==DERECHA && balas[i].posX==132) //el jugador ha bloqueado el proyectil
 					{
 						balas[i].viva = 0;
 						BorrarProyH(i,balas[i].posX,balas[i].posY);
 					}
-					else if (ultimaPos!=2 && balas[i].posX<=128) //La bala le ha dado al jugador===No estaba bloqueandola
+					else if (ultimaPos!=DERECHA && balas[i].posX<=132) //La bala le ha dado al jugador===No estaba bloqueandola
 					{
 						vidasJugador--;
 						balas[i].viva = 0;
@@ -129,14 +130,14 @@ void RutAtencionTempo()
 					}
 					
 				}
-				if (balas[i].ubi==3) //IZQUIERDA -> x++
+				if (balas[i].ubi==IZQUIERDA) //IZQUIERDA -> x++
 				{
-					if (ultimaPos==3 && balas[i].posX==125) //el jugador ha bloqueado el proyectil
+					if (ultimaPos==IZQUIERDA && balas[i].posX==120) //el jugador ha bloqueado el proyectil
 					{
 						balas[i].viva = 0;
 						BorrarProyH(i,balas[i].posX,balas[i].posY);
 					}
-					else if (ultimaPos!=3 && balas[i].posX >=126) //La bala le ha dado al jugador===No estaba bloqueandola
+					else if (ultimaPos!=IZQUIERDA && balas[i].posX >=120) //La bala le ha dado al jugador===No estaba bloqueandola
 					{
 						vidasJugador--;
 						balas[i].viva = 0;
@@ -150,14 +151,8 @@ void RutAtencionTempo()
 					
 				}
 				
-				
 			}
-			i++;
 		}
-		
-	}
-	
-
 	}
 }
 

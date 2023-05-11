@@ -24,7 +24,7 @@ int X,Y;
 void juego()
 {	
 	ESTADO=INICIO;
-	ConfigurarTeclado(0x400C); // Configurar el teclado.
+	ConfigurarTeclado(0x4308); // Configurar el teclado.
 	ConfigurarTemporizador( 56798,  0x00C1); // Configurar el temporizador.
 	HabilitarIntTeclado(); // Habilitar las interrupciones del teclado.
 	HabilitarInterrupciones();
@@ -36,9 +36,9 @@ void juego()
 	while(1){
 		  if(TeclaDetectada()){ //DEBUG
 		  	iprintf("\x1b[01;00HTecla pulsada: %d",TeclaPulsada());
-		  	iprintf("\x1b[02;00HEstado: %d",ESTADO);
+		  	iprintf("\x1b[05;00HEstado: %d",ESTADO);
 			iprintf("\x1b[03;00HUltimaPos: %d",ultimaPos);
-			iprintf("\x1b[04;00HVidas: %d",vidasJugador);
+			//iprintf("\x1b[04;00HVidas: %d",vidasJugador);
 			iprintf("\x1b[02;00HposX: %d, posY: %d",X,Y);
 		  }
 		
@@ -51,29 +51,30 @@ void juego()
 			if(tactilTocada()){
 				consoleClear();	
 				MostrarPersonaje(0);
+				vidasJugador = 3;
 				ESTADO = JUEGO;
 			}		
 		}
 
 		if(ESTADO == JUEGO){
-			vidasJugador = 3;				 
+							 
 			if(TeclaDetectada()){
         		iprintf("\x1b[04;00HVidas: %d",vidasJugador);
 				if(TeclaPulsada() == ARRIBA){
-            		MostrarPersonaje(0);
-					ultimaPos = 0;
+            		MostrarPersonaje(ARRIBA);
+					ultimaPos = ARRIBA;
         		}
         		else if(TeclaPulsada() == ABAJO){
-					MostrarPersonaje(1);
-					ultimaPos = 1;
+					MostrarPersonaje(ABAJO);
+					ultimaPos = ABAJO;
         		}
         		else if(TeclaPulsada() == DERECHA){
-					MostrarPersonaje(2);
-					ultimaPos = 2;
+					MostrarPersonaje(DERECHA);
+					ultimaPos = DERECHA;
 				}
         		else if(TeclaPulsada() == IZQUIERDA){
-					MostrarPersonaje(3);
-					ultimaPos = 3;
+					MostrarPersonaje(IZQUIERDA);
+					ultimaPos = IZQUIERDA;
 				}
 				else if(TeclaPulsada() == L){ //POR INTERRUPCION
 					ESTADO = PAUSA;	//POR INTERRUPCION		

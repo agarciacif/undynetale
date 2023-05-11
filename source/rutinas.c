@@ -22,20 +22,20 @@ void BorrarPersonaje(int num, int posX, int posY){
 void MostrarPersonaje(int pos){
 	switch (pos)
 	{
-	case 0:
-		MostrarArriba(2, X, Y);
+	case 7:
+		MostrarArriba(40, X, Y);
 		break;
 	
-	case 1:
-		MostrarAbajo(2, X, Y);
+	case 6:
+		MostrarAbajo(40, X, Y);
 		break;
 
-	case 2:
-		MostrarDerecha(2, X, Y);
+	case 4:
+		MostrarDerecha(40, X, Y);
 		break;
 
-	case 3:
-		MostrarIzquierda(2, X, Y);
+	case 5:
+		MostrarIzquierda(40, X, Y);
 		break;
 	}
 }
@@ -55,7 +55,7 @@ void dispararBala(){
 		}
 	
 	//elige la ubicación de la nueva bala
-	int random = 0; //TODO: RAND(4)
+	int random = 0 + 4; //TODO: RAND(4) + 4
 	balas[i].ubi=random;
 	switch (random)
 		{
@@ -87,15 +87,16 @@ void dispararBala(){
 }
 
 void visualizarVidas(){ //TODO: implementar
-	int vx, vy;
+	int vx, vy, i;
 	vx = 10;
 	vy = 170;
-	for (int i = 0; i < vidasJugador; i++)
-	{
-		MostrarVida(i,vx,vy);
-		vx+=20;
+	 
+	 for (i = 0; i < vidasJugador; i++)
+	 {
+	 	MostrarVida(i,vx,vy);
+	 	vx+=20;
 
-	}
+	 }
 	
 
 

@@ -48,7 +48,7 @@ void ConfigurarTemporizador(int Latch, int Conf_Tempo)
 	//Configuración del temporizador. El latch es el valor del registro de datos del temporizador
         //Activar los bits del registro de control necesarios en base a los bits activados en el parámetro Conf_Tempo
 	TIMER0_DAT=Latch;
-	TIMER0_CNT=Conf_Tempo;
+	TIMER0_CNT|=Conf_Tempo;
 	
 }
 
