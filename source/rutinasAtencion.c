@@ -60,7 +60,7 @@ void RutAtencionTempo()
 			//iprintf("\x1b[15;0HTiempo transcurrido=%d", seg);
 			tick=0;
 		}
-		if (seg==20)
+		if (seg==10) //Una bala cada 10 segs
 		{
 		seg = 0;
 		
@@ -156,6 +156,18 @@ void RutAtencionTempo()
 				iprintf("\x1b[04;00HVidas: %d",vidasJugador);
 				if (vidasJugador <= 0)
 				{
+					int j;
+					for (j = 0; j < MAX_BALAS; j++)
+					{
+						balas[j].viva = 0;
+						if (balas[j].ubi == ARRIBA || balas[j].ubi == ABAJO)
+						{
+							BorrarProyV(j,balas[j].posX,balas[j].posY);
+						} else{
+							BorrarProyH(j,balas[j].posX,balas[j].posY);
+						}
+						
+					}
 					consoleClear();
 					ESTADO = MUERTE;
 				}

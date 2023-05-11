@@ -44,8 +44,8 @@ void juego()
 		
 		if(ESTADO == INICIO){
 			BorrarPersonaje();			
-			// iprintf("\x1b[01;00HESQUIVA LAS BALAS!");
-			// iprintf("\x1b[02;00HPULSA LA PANTALLA PARA EMPEZAR");
+			iprintf("\x1b[01;00HESQUIVA LAS BALAS!");
+			iprintf("\x1b[02;00HPULSA LA PANTALLA PARA EMPEZAR");
 	
 			
 			if(tactilTocada()){
