@@ -13,30 +13,30 @@
 int X,Y;
 
 struct Bala balas[MAX_BALAS];
-void BorrarPersonaje(int num, int posX, int posY){
-	BorrarArriba(num,posX,posY);
-	BorrarAbajo(num,posX,posY);
-	BorrarDerecha(num,posX,posY);
-	BorrarIzquierda(num,posX,posY);
+void BorrarPersonaje(){
+	BorrarArriba(PlayerID,X,Y);
+	BorrarAbajo(PlayerID,X,Y);
+	BorrarDerecha(PlayerID,X,Y);
+	BorrarIzquierda(PlayerID,X,Y);
 }
 
 void MostrarPersonaje(int pos){
 	switch (pos)
 	{
 	case ARRIBA:
-		MostrarArriba(99, X, Y);
+		MostrarArriba(PlayerID, X, Y);
 		break;
 	
 	case ABAJO:
-		MostrarAbajo(99, X, Y);
+		MostrarAbajo(PlayerID, X, Y);
 		break;
 
 	case DERECHA:
-		MostrarDerecha(99, X, Y);
+		MostrarDerecha(PlayerID, X, Y);
 		break;
 
 	case IZQUIERDA:
-		MostrarIzquierda(99, X, Y);
+		MostrarIzquierda(PlayerID, X, Y);
 		break;
 	}
 }

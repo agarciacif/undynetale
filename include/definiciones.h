@@ -47,10 +47,13 @@ touchPosition PANT_DAT;
 #define MUERTE 2
 #define PAUSA 3
 
-#define MAX_BALAS 10
-#define LIMX 255;
-#define LIMY 191;
+#define MAX_BALAS 10 //Máximo de balas en pantalla ===Tamaño del array de balas
 
+//Tamaño de pantalla ===Limite de coordenadas
+#define LIMX 255 
+#define LIMY 191  
+#define PlayerID 99 //Identificador del sprite de jugador
+#define VIDAS 3 //El numero de vidas que tendrá el jugador
 struct Bala
 {
 	int index;
@@ -59,16 +62,10 @@ struct Bala
 	int viva;
 	int ubi;
 };
-extern int ESTADO;
 
-/**
- * ARRIBA = 0
- * ABAJO = 1
- * DERECHA = 2
- * IZQUIERDA = 3
- */
-extern int ultimaPos;
-extern struct Bala balas[MAX_BALAS];
-extern int vidasJugador;
+extern int ESTADO; //Estado del juego
+extern int ultimaPos; //Ultima orientación del jugador
+extern struct Bala balas[MAX_BALAS]; //Los proyectiles del juego
+extern int vidasJugador; //Las vidas del jugador
 extern int X; //PlayerX
 extern int Y;//PlayerY

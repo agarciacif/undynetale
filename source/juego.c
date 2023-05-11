@@ -43,15 +43,15 @@ void juego()
 		//   }
 		
 		if(ESTADO == INICIO){
-			BorrarPersonaje(2,X,Y);			
+			BorrarPersonaje();			
 			// iprintf("\x1b[01;00HESQUIVA LAS BALAS!");
 			// iprintf("\x1b[02;00HPULSA LA PANTALLA PARA EMPEZAR");
 	
 			
 			if(tactilTocada()){
 				consoleClear();	
-				MostrarPersonaje(0);
-				vidasJugador = 3;
+				MostrarPersonaje(ARRIBA);
+				vidasJugador = VIDAS;
 				iprintf("\x1b[04;00HVidas: %d",vidasJugador);
 				ESTADO = JUEGO;
 			}		
@@ -90,8 +90,8 @@ void juego()
 			if(TeclaDetectada()){ //POR INTERRUPCION
 				if(TeclaPulsada()==R){ //POR INTERRUPCION
 					consoleClear(); //POR INTERRUPCION
+					//MostrarPersonaje(ultimaPos); //POR INTERRUPCION
 					ESTADO = JUEGO;  //POR INTERRUPCION
-					MostrarPersonaje(ultimaPos); //POR INTERRUPCION
 					} //POR INTERRUPCION
 				else if(TeclaPulsada()==START){ //POR INTERRUPCION
 					consoleClear(); //POR INTERRUPCION
@@ -101,6 +101,11 @@ void juego()
 		}
 		if (ESTADO == MUERTE)
 		{
+			int i;
+			
+			
+			
+
 			iprintf("\x1b[01;00HHAS MUERTO");
 			iprintf("\x1b[02;00HPULSA START PARA VOLVER AL MENU");
 			if (TeclaDetectada()&&TeclaPulsada() == START) //Por interrupcion
