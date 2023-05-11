@@ -30,10 +30,10 @@ void RutAtencionTeclado ()
 	// }
 	
 
-	if (TeclaPulsada() == L && ESTADO == JUEGO)
-	{
-		ESTADO = PAUSA;
-	}
+	// if (TeclaPulsada() == L && ESTADO == JUEGO)
+	// {
+	// 	ESTADO = PAUSA;
+	// }
 	
 	// if (TeclaPulsada() == START && ESTADO == MUERTE)
 	// {
@@ -48,8 +48,7 @@ void RutAtencionTempo()
 {
 	static int tick=0;
 	static int seg=0;
-	int i;
-	
+	int i, puntos;
 	
 	if (ESTADO==JUEGO)
 	{
@@ -60,11 +59,10 @@ void RutAtencionTempo()
 			//iprintf("\x1b[15;0HTiempo transcurrido=%d", seg);
 			tick=0;
 		}
-		if (seg==10) //Una bala cada 10 segs
+		if (seg==300) //Una bala cada 10 segs
 		{
-		seg = 0;
-		
-		dispararBala();
+			seg = 0;
+			dispararBala();
 		}
 		for(i = 0; i<MAX_BALAS; i++)
 		{
@@ -75,6 +73,7 @@ void RutAtencionTempo()
 					if (ultimaPos==ARRIBA && balas[i].posY==80) //el jugador ha bloqueado el proyectil
 					{
 						balas[i].viva = 0;
+						puntos++;
 						BorrarProyV(i,balas[i].posX,balas[i].posY);
 					}
 					else if (ultimaPos!=ARRIBA && balas[i].posY > 80) //La bala le ha dado al jugador===No estaba bloqueandola
@@ -95,12 +94,12 @@ void RutAtencionTempo()
 					if (ultimaPos==ABAJO && balas[i].posY==110) //el jugador ha bloqueado el proyectil
 					{
 						balas[i].viva = 0;
+						puntos++;	
 						BorrarProyV(i,balas[i].posX,balas[i].posY);
 					}
 					else if (ultimaPos!=ABAJO && balas[i].posY < 110) //La bala le ha dado al jugador===No estaba bloqueandola
 					{
 						vidasJugador--;
-						
 						balas[i].viva = 0;
 						BorrarProyV(i,balas[i].posX,balas[i].posY);
 					}
@@ -116,12 +115,12 @@ void RutAtencionTempo()
 					if (ultimaPos==DERECHA && balas[i].posX==140) //el jugador ha bloqueado el proyectil
 					{
 						balas[i].viva = 0;
+						puntos++;	
 						BorrarProyH(i,balas[i].posX,balas[i].posY);
 					}
 					else if (ultimaPos!=DERECHA && balas[i].posX < 140) //La bala le ha dado al jugador===No estaba bloqueandola
 					{
 						vidasJugador--;
-						
 						balas[i].viva = 0;
 						BorrarProyH(i,balas[i].posX,balas[i].posY);
 					}
@@ -137,12 +136,12 @@ void RutAtencionTempo()
 					if (ultimaPos==IZQUIERDA && balas[i].posX==110) //el jugador ha bloqueado el proyectil
 					{
 						balas[i].viva = 0;
+						puntos++;
 						BorrarProyH(i,balas[i].posX,balas[i].posY);
 					}
 					else if (ultimaPos!=IZQUIERDA && balas[i].posX > 110) //La bala le ha dado al jugador===No estaba bloqueandola
 					{
 						vidasJugador--;
-						
 						balas[i].viva = 0;
 						BorrarProyH(i,balas[i].posX,balas[i].posY);
 					}
@@ -172,8 +171,6 @@ void RutAtencionTempo()
 					ESTADO = MUERTE;
 				}
 					
-			
-			
 			}
 		}
 	}

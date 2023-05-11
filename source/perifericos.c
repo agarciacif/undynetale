@@ -38,8 +38,6 @@ if ((~TECLAS_DAT & 0x0001)!=0){return A;
 
 void ConfigurarTeclado(int Conf_Tec)
 {
-	//Configuración del teclado. Modificar su registro de control en base a los bits
-        //activados en el parametro Conf_Tec
 	TECLAS_CNT|=Conf_Tec;
 }
 
@@ -54,11 +52,8 @@ void ConfigurarTemporizador(int Latch, int Conf_Tempo)
 
 void HabilitarIntTeclado()
 {
-	//Habilitar las interrupciones del teclado
-	//Para realizar esa operación, primero deshabilitar todas las interrupciones de forma general, realizar la operación, 
-	//y después volver a habilitar las interrupciones de forma general 
+	
 	IME=0;
-        //ESCRIBIR AQUÍ VUESTRO CÓDIGO
 	IE|=0x00001000;
 	IME=1;
 }

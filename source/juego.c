@@ -13,24 +13,23 @@
 #include "fondos.h"
 #include "rutinas.h"
 
-int tiempo;
-int seg;
 int tecla, ultimaPos;
 int vidasJugador;
 struct Bala balas[MAX_BALAS];
 int i;
 int X,Y;
-//int rand;
+int puntos = 0;
+char teclas[11][10] = {"A","B","SELECT","START","DERECHA","IZQUIERDA","ARRIBA","ABAJO","R","L", " "};
 void juego()
 {	
 	ESTADO=INICIO;
-	ConfigurarTeclado(0x4308); // Configurar el teclado.
+	ConfigurarTeclado(0x430F); // Configurar el teclado.
 	ConfigurarTemporizador( 56798,  0x00C1); // Configurar el temporizador.
 	HabilitarIntTeclado(); // Habilitar las interrupciones del teclado.
 	HabilitarInterrupciones();
 	HabilitarIntTempo(); // Habilitar las interrupciones del temporizador.
 	EstablecerVectorInt(); // Habilitar interrupciones.
-
+	tecla = 0;
 	ultimaPos = -1; //0: ARRIBA, 1: ABAJO, 2: DERECHA, 3:IZQUIERDA
 	i = 0;
 	while(1){
@@ -42,9 +41,11 @@ void juego()
 		// 	iprintf("\x1b[08;00HposX: %d, posY: %d",X,Y);
 		//   }
 		
+		
+		
 		if(ESTADO == INICIO){
 			BorrarPersonaje();			
-			iprintf("\x1b[01;00HESQUIVA LAS BALAS!");
+			iprintf("\x1b[01;00HBLOQUEA LOS PROYECTILES!");
 			iprintf("\x1b[02;00HPULSA LA PANTALLA PARA EMPEZAR");
 	
 			
@@ -58,9 +59,10 @@ void juego()
 		}
 
 		if(ESTADO == JUEGO){
-							 
+					 
 			if(TeclaDetectada()){
-        		
+        		tecla = TeclaPulsada();
+				iprintf("\x1b[08;00HTecla Pulsada = %s",teclas[tecla]);
 				if(TeclaPulsada() == ARRIBA){
             		MostrarPersonaje(ARRIBA);
 					ultimaPos = ARRIBA;
@@ -77,9 +79,9 @@ void juego()
 					MostrarPersonaje(IZQUIERDA);
 					ultimaPos = IZQUIERDA;
 				}
-				// else if(TeclaPulsada() == L){ //POR INTERRUPCION
-				// 	ESTADO = PAUSA;	//POR INTERRUPCION		
-				// } //POR INTERRUPCION
+				else if(TeclaPulsada() == L){ //POR INTERRUPCION
+					ESTADO = PAUSA;	//POR INTERRUPCION		
+				} //POR INTERRUPCION
     		}
 		}
 		
@@ -101,11 +103,6 @@ void juego()
 		}
 		if (ESTADO == MUERTE)
 		{
-			int i;
-			
-			
-			
-
 			iprintf("\x1b[01;00HHAS MUERTO");
 			iprintf("\x1b[02;00HPULSA START PARA VOLVER AL MENU");
 			if (TeclaDetectada()&&TeclaPulsada() == START) //Por interrupcion
