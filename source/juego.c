@@ -87,6 +87,7 @@ void juego()
 				}
 				else if(TeclaPulsada() == L){ //POR INTERRUPCION
 					consoleClear(); //POR INTERRUPCION
+					visualizarPausa();
 					ESTADO = PAUSA;	//POR INTERRUPCION
 				} //POR INTERRUPCION
     		}
@@ -103,6 +104,7 @@ void juego()
 					iprintf("\x1b[05;05H----CONTROLES----"); //POR INTERRUPCION
 					iprintf("\x1b[06;00HTeclas de direccion: dirigir escudo"); //POR INTERRUPCION
 					iprintf("\x1b[007;00HL: PAUSA"); //POR INTERRUPCION
+					cambiarFondo();
 					ESTADO = JUEGO;  //POR INTERRUPCION
 					} //POR INTERRUPCION
 				
