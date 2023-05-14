@@ -29,6 +29,7 @@ void juego()
 	HabilitarInterrupciones();
 	HabilitarIntTempo(); // Habilitar las interrupciones del temporizador.
 	EstablecerVectorInt(); // Habilitar interrupciones.
+	visualizarInicio();
 	tecla = 0;
 	ultimaPos = -1; //0: ARRIBA, 1: ABAJO, 2: DERECHA, 3:IZQUIERDA
 	i = 0;
@@ -79,9 +80,9 @@ void juego()
 					MostrarPersonaje(IZQUIERDA);
 					ultimaPos = IZQUIERDA;
 				}
-				else if(TeclaPulsada() == L){ //POR INTERRUPCION
-					ESTADO = PAUSA;	//POR INTERRUPCION		
-				} //POR INTERRUPCION
+				// else if(TeclaPulsada() == L){ //POR INTERRUPCION
+				// 	ESTADO = PAUSA;	//POR INTERRUPCION		
+				// } //POR INTERRUPCION
     		}
 		}
 		
@@ -89,27 +90,27 @@ void juego()
 
 			iprintf("\x1b[015;00HPAUSA");
 			iprintf("\x1b[016;00HPULSA R PARA SEGUIR O START PARA VOLVER AL MENU");
-			if(TeclaDetectada()){ //POR INTERRUPCION
-				if(TeclaPulsada()==R){ //POR INTERRUPCION
-					consoleClear(); //POR INTERRUPCION
-					//MostrarPersonaje(ultimaPos); //POR INTERRUPCION
-					ESTADO = JUEGO;  //POR INTERRUPCION
-					} //POR INTERRUPCION
-				else if(TeclaPulsada()==START){ //POR INTERRUPCION
-					consoleClear(); //POR INTERRUPCION
-					ESTADO = INICIO; //POR INTERRUPCION
-					} //POR INTERRUPCION					
-			}	 //POR INTERRUPCION		
+			// if(TeclaDetectada()){ //POR INTERRUPCION
+			// 	if(TeclaPulsada()==R){ //POR INTERRUPCION
+			// 		consoleClear(); //POR INTERRUPCION
+			// 		//MostrarPersonaje(ultimaPos); //POR INTERRUPCION
+			// 		ESTADO = JUEGO;  //POR INTERRUPCION
+			// 		} //POR INTERRUPCION
+			// 	else if(TeclaPulsada()==START){ //POR INTERRUPCION
+			// 		consoleClear(); //POR INTERRUPCION
+			// 		ESTADO = INICIO; //POR INTERRUPCION
+			// 		} //POR INTERRUPCION					
+			// }	 //POR INTERRUPCION		
 		}
 		if (ESTADO == MUERTE)
 		{
 			iprintf("\x1b[01;00HHAS MUERTO");
 			iprintf("\x1b[02;00HPULSA START PARA VOLVER AL MENU");
-			if (TeclaDetectada()&&TeclaPulsada() == START) //Por interrupcion
-			{ //POR INTERRUPCION
-				consoleClear(); //POR INTERRUPCION
-				ESTADO = INICIO; //POR INTERRUPCION
-			} //POR INTERRUPCION
+			// if (TeclaDetectada()&&TeclaPulsada() == START) //Por interrupcion
+			// { //POR INTERRUPCION
+			// 	consoleClear(); //POR INTERRUPCION
+			// 	ESTADO = INICIO; //POR INTERRUPCION
+			// } //POR INTERRUPCION
 		}
 	}
 }

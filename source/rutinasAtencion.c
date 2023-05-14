@@ -16,31 +16,33 @@ struct Bala balas[MAX_BALAS];
 int vidasJugador;
 void RutAtencionTeclado ()
 {	
-	// if (ESTADO == PAUSA)
-	// {
-	// 	if(TeclaPulsada()==R){
-	// 		ESTADO = JUEGO;
-	// 		MostrarPersonaje(ultimaPos);
-	// 		consoleClear();
-	// 	}
-	// 	else if(TeclaPulsada()==START){
-	// 		ESTADO = INICIO;
-	// 		consoleClear();
-	// 	}
-	// }
+	int tecla = TeclaPulsada();
+	switch (tecla)
+	{
+	case START:
+		if (ESTADO == PAUSA) 
+		{
+			ESTADO = INICIO;
+	   		consoleClear();
+		} else if(ESTADO == MUERTE){
+			ESTADO = INICIO;
+			consoleClear();
+		} break;
 	
-
-	// if (TeclaPulsada() == L && ESTADO == JUEGO)
-	// {
-	// 	ESTADO = PAUSA;
-	// }
+	case L:
+		if (ESTADO == JUEGO)
+		{
+			ESTADO = PAUSA;
+		} break;
 	
-	// if (TeclaPulsada() == START && ESTADO == MUERTE)
-	// {
-	// 	ESTADO = INICIO;
-	// 	consoleClear();
-	// }
-
+	case R:
+		if (ESTADO == PAUSA)
+		{
+			ESTADO = JUEGO;
+			MostrarPersonaje(ultimaPos);
+			consoleClear();
+		} break;
+	}
 }
 
 
@@ -59,7 +61,7 @@ void RutAtencionTempo()
 			//iprintf("\x1b[15;0HTiempo transcurrido=%d", seg);
 			tick=0;
 		}
-		if (seg==300) //Una bala cada 10 segs
+		if (seg==25) //Una bala cada 10 segs
 		{
 			seg = 0;
 			dispararBala();
