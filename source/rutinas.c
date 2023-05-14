@@ -61,28 +61,28 @@ void dispararBala(){
 	
 	//elige la ubicación de la nueva bala
 
-	int random = r+4; //TODO: RAND(4) + 4
+	int random = r+4;
 	balas[i].ubi=random;
 	switch (random)
 		{
 			case ARRIBA: //Bala arriba
-				balas[i].posX = 127;
+				balas[i].posX = 120;
 				balas[i].posY = 0;
 				MostrarProyV(i,balas[i].posX,balas[i].posY);
 				break;
 			case ABAJO: //Bala abajo
-				balas[i].posX = 127;
+				balas[i].posX = 120;
 				balas[i].posY = 191;
 				MostrarProyV(i,balas[i].posX,balas[i].posY);
 				break;
 			case DERECHA: //Bala derecha
 				balas[i].posX = 255;
-				balas[i].posY = 95;
+				balas[i].posY = 88;
 				MostrarProyH(i,balas[i].posX,balas[i].posY);
 				break;
 			case IZQUIERDA: //Bala izquierda
 				balas[i].posX = 0;
-				balas[i].posY = 95;
+				balas[i].posY = 88;
 				MostrarProyH(i,balas[i].posX,balas[i].posY);
 				break;
 			default:
@@ -92,17 +92,20 @@ void dispararBala(){
 		
 }
 
-void visualizarVidas(){ //TODO: implementar
-	int vx, vy, i;
-	vx = 10;
-	vy = 170;
-	 
-	for (i = 0; i < vidasJugador; i++)
-	{
-	 	MostrarVida(i,vx,vy);
-		vx+=20;
-	}
-	
-
-
+void cambiarFondo(){ 
+	switch (vidasJugador)
+		{
+		case 3:
+			visualizarJuego3();
+			break;
+		case 2:
+			visualizarJuego2(); 
+			break;
+		case 1: 
+			visualizarJuego1();
+			break;
+		default:
+			break;
+		}
+		
 }

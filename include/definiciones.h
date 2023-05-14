@@ -69,7 +69,7 @@ extern struct Bala balas[MAX_BALAS]; //Los proyectiles del juego
 extern int vidasJugador; //Las vidas del jugador
 extern int X; //PlayerX
 extern int Y;//PlayerY
-extern int puntos;
+
 extern int dif;
-extern int seg;
+extern int cont;
 extern int tick;

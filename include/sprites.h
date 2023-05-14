@@ -27,6 +27,22 @@ extern void BorrarRombo(int indice, int x, int y);
 
 extern void MostrarRomboGrande(int indice, int x, int y);
 extern void BorrarRomboGrande(int indice, int x, int y);
-extern void MostrarCabeza_arriba(int indice, int x, int y);
-extern void BorrarCabeza_arriba(int indice, int x, int y);
+
+extern void MostrarArriba(int indice, int x, int y);
+extern void BorrarArriba(int indice, int x, int y);
+
+extern void MostrarAbajo(int indice, int x, int y);
+extern void BorrarAbajo(int indice, int x, int y);
+
+extern void MostrarIzquierda(int indice, int x, int y);
+extern void BorrarIzquierda(int indice, int x, int y);
+
+extern void MostrarDerecha(int indice, int x, int y);
+extern void BorrarDerecha(int indice, int x, int y);
+
+extern void MostrarProyH(int indice, int x, int y);
+extern void BorrarProyH(int indice, int x, int y);
+
+extern void MostrarProyV(int indice, int x, int y);
+extern void BorrarProyV(int indice, int x, int y);
 

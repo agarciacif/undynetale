@@ -19,8 +19,7 @@ struct Bala balas[MAX_BALAS];
 int i;
 int X,Y;
 int puntos = 0;
-int seg,tick, dif;
-char teclas[11][10] = {"A","B","SELECT","START","DERECHA","IZQUIERDA","ARRIBA","ABAJO","R","L", " "};
+int cont, tick, dif;
 void juego()
 {	
 	ESTADO=INICIO;
@@ -31,6 +30,7 @@ void juego()
 	HabilitarIntTempo(); // Habilitar las interrupciones del temporizador.
 	EstablecerVectorInt(); // Habilitar interrupciones.
 	srand(time(NULL)); //Inicializa la semilla para randomizar las ubicaciones de las balas
+	visualizarInicio();
 	tecla = 0;
 	ultimaPos = -1; //0: ARRIBA, 1: ABAJO, 2: DERECHA, 3:IZQUIERDA
 	i = 0;
@@ -59,16 +59,16 @@ void juego()
 				iprintf("\x1b[06;07H----CONTROLES----");
 				iprintf("\x1b[07;00HTeclas de direccion: dirigir escudo");
 				iprintf("\x1b[08;00HL: PAUSA");
-				seg = tick = dif = 0;
+				visualizarJuego3();
+				cont = tick = dif = 0;
 				ESTADO = JUEGO;
 			}		
 		}
 
 		if(ESTADO == JUEGO){
-					 
+			//CONTROLES DEL PERSONAJE
 			if(TeclaDetectada()){
         		tecla = TeclaPulsada();
-				//iprintf("\x1b[08;00HTecla Pulsada = %s",teclas[tecla]);
 				if(TeclaPulsada() == ARRIBA){
             		MostrarPersonaje(ARRIBA);
 					ultimaPos = ARRIBA;
@@ -86,8 +86,8 @@ void juego()
 					ultimaPos = IZQUIERDA;
 				}
 				else if(TeclaPulsada() == L){ //POR INTERRUPCION
-					consoleClear();
-					ESTADO = PAUSA;	//POR INTERRUPCION		
+					consoleClear(); //POR INTERRUPCION
+					ESTADO = PAUSA;	//POR INTERRUPCION
 				} //POR INTERRUPCION
     		}
 		}
@@ -105,23 +105,25 @@ void juego()
 					iprintf("\x1b[007;00HL: PAUSA"); //POR INTERRUPCION
 					ESTADO = JUEGO;  //POR INTERRUPCION
 					} //POR INTERRUPCION
+				
+				
 				else if(TeclaPulsada()==START){ //POR INTERRUPCION
 					consoleClear(); //POR INTERRUPCION
-					int j;
-					for (j = 0; j < MAX_BALAS; j++)
-					{
-						balas[j].viva = 0;
-						if (balas[j].ubi == ARRIBA || balas[j].ubi == ABAJO)
-						{
-							BorrarProyV(j,balas[j].posX,balas[j].posY);
-						} else{
-							BorrarProyH(j,balas[j].posX,balas[j].posY);
-						}
-						
-					}
-					
+					int j; //POR INTERRUPCION
+					//RESETEA EL ARRAY DE BALAS
+					for (j = 0; j < MAX_BALAS; j++) //POR INTERRUPCION
+					{ //POR INTERRUPCION
+						balas[j].viva = 0; //POR INTERRUPCION
+						if (balas[j].ubi == ARRIBA || balas[j].ubi == ABAJO) //POR INTERRUPCION
+						{ //POR INTERRUPCION
+							BorrarProyV(j,balas[j].posX,balas[j].posY); //POR INTERRUPCION
+						} else{ //POR INTERRUPCION
+							BorrarProyH(j,balas[j].posX,balas[j].posY); //POR INTERRUPCION
+						} //POR INTERRUPCION
+					} //POR INTERRUPCION
+					visualizarInicio(); //POR INTERRUPCION
 					ESTADO = INICIO; //POR INTERRUPCION
-					} //POR INTERRUPCION					
+				} //POR INTERRUPCION					
 			}	 //POR INTERRUPCION		
 		}
 		if (ESTADO == MUERTE)
@@ -131,6 +133,7 @@ void juego()
 			if (TeclaDetectada()&&TeclaPulsada() == START) //Por interrupcion
 			{ //POR INTERRUPCION
 				consoleClear(); //POR INTERRUPCION
+				visualizarInicio();
 				ESTADO = INICIO; //POR INTERRUPCION
 			} //POR INTERRUPCION
 		}

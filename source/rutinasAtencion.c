@@ -9,13 +9,11 @@ rutinasAtencion.c
 #include "fondos.h"
 #include "sprites.h"
 
-
 int ESTADO;
-int seg3;
 struct Bala balas[MAX_BALAS];
 int vidasJugador;
 int tick;
-int seg;
+int cont;
 int dif;
 void RutAtencionTeclado ()
 {	
@@ -60,16 +58,16 @@ void RutAtencionTempo()
 		if (tick%(50-dif)==0) //La frecuencia de aparición de balas
 		{
 			dispararBala();
-			seg++;
+			cont++;
 		}
-		if (seg == 10) //Cada 50*10 ticks, se disminuye en 1 los ticks de frecuencia de aparición, aumentando así la dificultad del juego progresivamente
+		if (cont == 10) //Cada 50*10 ticks, se disminuye en 1 los ticks de frecuencia de aparición, aumentando así la dificultad del juego progresivamente
 		{
-			seg = 0;
+			cont = 0;
 			dif++;
 		}
 		
 
-		iprintf("\x1b[01;00HPuntuacion=%d",tick);
+		//iprintf("\x1b[01;00HPuntuacion=%d",tick);
 
 		for(i = 0; i<MAX_BALAS; i++)
 		{
@@ -77,18 +75,18 @@ void RutAtencionTempo()
 			{
 				if (balas[i].ubi==ARRIBA) //ARRIBA -> y++
 				{
-					if (ultimaPos==ARRIBA && balas[i].posY==80) //el jugador ha bloqueado el proyectil
+					if (ultimaPos==ARRIBA && balas[i].posY==70) //el jugador ha bloqueado el proyectil
 					{
 						balas[i].viva = 0;
 						puntos++;
 						BorrarProyV(i,balas[i].posX,balas[i].posY);
 					}
-					else if (ultimaPos!=ARRIBA && balas[i].posY > 80) //La bala le ha dado al jugador===No estaba bloqueandola
+					else if (ultimaPos!=ARRIBA && balas[i].posY > 70) //La bala le ha dado al jugador===No estaba bloqueandola
 					{
 						vidasJugador--;
-						
 						balas[i].viva = 0;
 						BorrarProyV(i,balas[i].posX,balas[i].posY);
+						cambiarFondo();
 					}
 					else //La bala sigue su recorrido
 					{
@@ -98,17 +96,18 @@ void RutAtencionTempo()
 				}
 				if (balas[i].ubi==ABAJO) //ABAJO -> y--
 				{
-					if (ultimaPos==ABAJO && balas[i].posY==110) //el jugador ha bloqueado el proyectil
+					if (ultimaPos==ABAJO && balas[i].posY==105) //el jugador ha bloqueado el proyectil
 					{
 						balas[i].viva = 0;
 						puntos++;	
 						BorrarProyV(i,balas[i].posX,balas[i].posY);
 					}
-					else if (ultimaPos!=ABAJO && balas[i].posY < 110) //La bala le ha dado al jugador===No estaba bloqueandola
+					else if (ultimaPos!=ABAJO && balas[i].posY < 105) //La bala le ha dado al jugador===No estaba bloqueandola
 					{
 						vidasJugador--;
 						balas[i].viva = 0;
 						BorrarProyV(i,balas[i].posX,balas[i].posY);
+						cambiarFondo();
 					}
 					else //La bala sigue su recorrido
 					{
@@ -119,17 +118,19 @@ void RutAtencionTempo()
 				if (balas[i].ubi==DERECHA) //DERECHA -> x--
 				{
 
-					if (ultimaPos==DERECHA && balas[i].posX==140) //el jugador ha bloqueado el proyectil
+					if (ultimaPos==DERECHA && balas[i].posX==137) //el jugador ha bloqueado el proyectil
 					{
 						balas[i].viva = 0;
 						puntos++;	
 						BorrarProyH(i,balas[i].posX,balas[i].posY);
+						cambiarFondo();
 					}
-					else if (ultimaPos!=DERECHA && balas[i].posX < 140) //La bala le ha dado al jugador===No estaba bloqueandola
+					else if (ultimaPos!=DERECHA && balas[i].posX < 137) //La bala le ha dado al jugador===No estaba bloqueandola
 					{
 						vidasJugador--;
 						balas[i].viva = 0;
 						BorrarProyH(i,balas[i].posX,balas[i].posY);
+						cambiarFondo();
 					}
 					else //La bala sigue su recorrido
 					{
@@ -140,17 +141,18 @@ void RutAtencionTempo()
 				}
 				if (balas[i].ubi==IZQUIERDA) //IZQUIERDA -> x++
 				{
-					if (ultimaPos==IZQUIERDA && balas[i].posX==110) //el jugador ha bloqueado el proyectil
+					if (ultimaPos==IZQUIERDA && balas[i].posX==103) //el jugador ha bloqueado el proyectil
 					{
 						balas[i].viva = 0;
 						puntos++;
 						BorrarProyH(i,balas[i].posX,balas[i].posY);
 					}
-					else if (ultimaPos!=IZQUIERDA && balas[i].posX > 110) //La bala le ha dado al jugador===No estaba bloqueandola
+					else if (ultimaPos!=IZQUIERDA && balas[i].posX > 103) //La bala le ha dado al jugador===No estaba bloqueandola
 					{
 						vidasJugador--;
 						balas[i].viva = 0;
 						BorrarProyH(i,balas[i].posX,balas[i].posY);
+						cambiarFondo();
 					}
 					else //La bala sigue su recorrido
 					{
@@ -175,6 +177,7 @@ void RutAtencionTempo()
 						
 					}
 					consoleClear();
+					visualizarMuerte();
 					ESTADO = MUERTE;
 				}
 					
