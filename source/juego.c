@@ -19,6 +19,7 @@ struct Bala balas[MAX_BALAS];
 int i;
 int X,Y;
 int puntos = 0;
+int seg,tick, dif;
 char teclas[11][10] = {"A","B","SELECT","START","DERECHA","IZQUIERDA","ARRIBA","ABAJO","R","L", " "};
 void juego()
 {	
@@ -29,7 +30,7 @@ void juego()
 	HabilitarInterrupciones();
 	HabilitarIntTempo(); // Habilitar las interrupciones del temporizador.
 	EstablecerVectorInt(); // Habilitar interrupciones.
-	visualizarInicio();
+	srand(time(NULL)); //Inicializa la semilla para randomizar las ubicaciones de las balas
 	tecla = 0;
 	ultimaPos = -1; //0: ARRIBA, 1: ABAJO, 2: DERECHA, 3:IZQUIERDA
 	i = 0;
@@ -55,6 +56,10 @@ void juego()
 				MostrarPersonaje(ARRIBA);
 				vidasJugador = VIDAS;
 				iprintf("\x1b[04;00HVidas: %d",vidasJugador);
+				iprintf("\x1b[06;07H----CONTROLES----");
+				iprintf("\x1b[07;00HTeclas de direccion: dirigir escudo");
+				iprintf("\x1b[08;00HL: PAUSA");
+				seg = tick = dif = 0;
 				ESTADO = JUEGO;
 			}		
 		}
@@ -63,7 +68,7 @@ void juego()
 					 
 			if(TeclaDetectada()){
         		tecla = TeclaPulsada();
-				iprintf("\x1b[08;00HTecla Pulsada = %s",teclas[tecla]);
+				//iprintf("\x1b[08;00HTecla Pulsada = %s",teclas[tecla]);
 				if(TeclaPulsada() == ARRIBA){
             		MostrarPersonaje(ARRIBA);
 					ultimaPos = ARRIBA;
@@ -80,37 +85,41 @@ void juego()
 					MostrarPersonaje(IZQUIERDA);
 					ultimaPos = IZQUIERDA;
 				}
-				// else if(TeclaPulsada() == L){ //POR INTERRUPCION
-				// 	ESTADO = PAUSA;	//POR INTERRUPCION		
-				// } //POR INTERRUPCION
+				else if(TeclaPulsada() == L){ //POR INTERRUPCION
+					consoleClear();
+					ESTADO = PAUSA;	//POR INTERRUPCION		
+				} //POR INTERRUPCION
     		}
 		}
 		
 		if(ESTADO == PAUSA){
 
-			iprintf("\x1b[015;00HPAUSA");
-			iprintf("\x1b[016;00HPULSA R PARA SEGUIR O START PARA VOLVER AL MENU");
-			// if(TeclaDetectada()){ //POR INTERRUPCION
-			// 	if(TeclaPulsada()==R){ //POR INTERRUPCION
-			// 		consoleClear(); //POR INTERRUPCION
-			// 		//MostrarPersonaje(ultimaPos); //POR INTERRUPCION
-			// 		ESTADO = JUEGO;  //POR INTERRUPCION
-			// 		} //POR INTERRUPCION
-			// 	else if(TeclaPulsada()==START){ //POR INTERRUPCION
-			// 		consoleClear(); //POR INTERRUPCION
-			// 		ESTADO = INICIO; //POR INTERRUPCION
-			// 		} //POR INTERRUPCION					
-			// }	 //POR INTERRUPCION		
+			iprintf("\x1b[01;00HPAUSA");
+			iprintf("\x1b[02;00HPULSA R PARA SEGUIR O START PARA VOLVER AL MENU");
+			if(TeclaDetectada()){ //POR INTERRUPCION
+				if(TeclaPulsada()==R){ //POR INTERRUPCION
+					consoleClear(); //POR INTERRUPCION
+					iprintf("\x1b[04;00HVidas: %d",vidasJugador); //POR INTERRUPCION
+					iprintf("\x1b[05;05H----CONTROLES----"); //POR INTERRUPCION
+					iprintf("\x1b[06;00HTeclas de direccion: dirigir escudo"); //POR INTERRUPCION
+					iprintf("\x1b[007;00HL: PAUSA"); //POR INTERRUPCION
+					ESTADO = JUEGO;  //POR INTERRUPCION
+					} //POR INTERRUPCION
+				else if(TeclaPulsada()==START){ //POR INTERRUPCION
+					consoleClear(); //POR INTERRUPCION
+					ESTADO = INICIO; //POR INTERRUPCION
+					} //POR INTERRUPCION					
+			}	 //POR INTERRUPCION		
 		}
 		if (ESTADO == MUERTE)
 		{
 			iprintf("\x1b[01;00HHAS MUERTO");
 			iprintf("\x1b[02;00HPULSA START PARA VOLVER AL MENU");
-			// if (TeclaDetectada()&&TeclaPulsada() == START) //Por interrupcion
-			// { //POR INTERRUPCION
-			// 	consoleClear(); //POR INTERRUPCION
-			// 	ESTADO = INICIO; //POR INTERRUPCION
-			// } //POR INTERRUPCION
+			if (TeclaDetectada()&&TeclaPulsada() == START) //Por interrupcion
+			{ //POR INTERRUPCION
+				consoleClear(); //POR INTERRUPCION
+				ESTADO = INICIO; //POR INTERRUPCION
+			} //POR INTERRUPCION
 		}
 	}
 }

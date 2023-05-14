@@ -41,6 +41,8 @@ void MostrarPersonaje(int pos){
 	}
 }
 
+
+
 void dispararBala(){
 	//crea nueva bala en una posición libre
 	int i = 0;
@@ -58,6 +60,7 @@ void dispararBala(){
 		}
 	
 	//elige la ubicación de la nueva bala
+
 	int random = r+4; //TODO: RAND(4) + 4
 	balas[i].ubi=random;
 	switch (random)
@@ -94,12 +97,11 @@ void visualizarVidas(){ //TODO: implementar
 	vx = 10;
 	vy = 170;
 	 
-	 for (i = 0; i < vidasJugador; i++)
-	 {
+	for (i = 0; i < vidasJugador; i++)
+	{
 	 	MostrarVida(i,vx,vy);
-	 	vx+=20;
-
-	 }
+		vx+=20;
+	}
 	
 
 

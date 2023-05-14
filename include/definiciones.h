@@ -70,3 +70,6 @@ extern int vidasJugador; //Las vidas del jugador
 extern int X; //PlayerX
 extern int Y;//PlayerY
 extern int puntos;
+extern int dif;
+extern int seg;
+extern int tick;

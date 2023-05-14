@@ -14,6 +14,9 @@ int ESTADO;
 int seg3;
 struct Bala balas[MAX_BALAS];
 int vidasJugador;
+int tick;
+int seg;
+int dif;
 void RutAtencionTeclado ()
 {	
 	int tecla = TeclaPulsada();
@@ -48,24 +51,26 @@ void RutAtencionTeclado ()
 
 void RutAtencionTempo()
 {
-	static int tick=0;
-	static int seg=0;
 	int i, puntos;
 	
 	if (ESTADO==JUEGO)
 	{
-		tick++; 
-		if (tick==5)
+		tick++;
+		
+		if (tick%(50-dif)==0) //La frecuencia de aparición de balas
 		{
+			dispararBala();
 			seg++;
-			//iprintf("\x1b[15;0HTiempo transcurrido=%d", seg);
-			tick=0;
 		}
-		if (seg==25) //Una bala cada 10 segs
+		if (seg == 10) //Cada 50*10 ticks, se disminuye en 1 los ticks de frecuencia de aparición, aumentando así la dificultad del juego progresivamente
 		{
 			seg = 0;
-			dispararBala();
+			dif++;
 		}
+		
+
+		iprintf("\x1b[01;00HPuntuacion=%d",tick);
+
 		for(i = 0; i<MAX_BALAS; i++)
 		{
 			if (balas[i].viva)
