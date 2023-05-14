@@ -107,6 +107,19 @@ void juego()
 					} //POR INTERRUPCION
 				else if(TeclaPulsada()==START){ //POR INTERRUPCION
 					consoleClear(); //POR INTERRUPCION
+					int j;
+					for (j = 0; j < MAX_BALAS; j++)
+					{
+						balas[j].viva = 0;
+						if (balas[j].ubi == ARRIBA || balas[j].ubi == ABAJO)
+						{
+							BorrarProyV(j,balas[j].posX,balas[j].posY);
+						} else{
+							BorrarProyH(j,balas[j].posX,balas[j].posY);
+						}
+						
+					}
+					
 					ESTADO = INICIO; //POR INTERRUPCION
 					} //POR INTERRUPCION					
 			}	 //POR INTERRUPCION		
