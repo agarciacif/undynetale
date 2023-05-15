@@ -54,7 +54,7 @@ void HabilitarIntTeclado()
 {
 	
 	IME=0;
-	IE|=0x00001000;
+	IE |= 0x1000;
 	IME=1;
 }
 

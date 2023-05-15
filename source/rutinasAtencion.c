@@ -18,30 +18,52 @@ int dif;
 void RutAtencionTeclado ()
 {	
 	int tecla = TeclaPulsada();
+	MostrarRomboGrande(tecla, 20,20); //DEBUG
 	switch (tecla)
 	{
 	case START:
 		if (ESTADO == PAUSA) 
 		{
-			ESTADO = INICIO;
-	   		consoleClear();
-		} else if(ESTADO == MUERTE){
-			ESTADO = INICIO;
 			consoleClear();
+			int j;
+			//RESETEA EL ARRAY DE BALAS
+			for (j = 0; j < MAX_BALAS; j++)
+			{
+				balas[j].viva = 0;
+				if (balas[j].ubi == ARRIBA || balas[j].ubi == ABAJO)
+				{
+					BorrarProyV(j,balas[j].posX,balas[j].posY);
+				} else{
+					BorrarProyH(j,balas[j].posX,balas[j].posY);
+				}
+			}
+			visualizarInicio();
+			ESTADO = INICIO;
+		} else if(ESTADO == MUERTE){
+			consoleClear();
+			visualizarInicio();
+			ESTADO = INICIO;
 		} break;
 	
 	case L:
 		if (ESTADO == JUEGO)
 		{
+			consoleClear();
+			visualizarPausa();
 			ESTADO = PAUSA;
-		} break;
+		} 
+		break;
 	
 	case R:
 		if (ESTADO == PAUSA)
 		{
-			ESTADO = JUEGO;
-			MostrarPersonaje(ultimaPos);
 			consoleClear();
+			iprintf("\x1b[04;00HVidas: %d",vidasJugador);
+			iprintf("\x1b[05;05H----CONTROLES----");
+			iprintf("\x1b[06;00HTeclas de direccion: dirigir escudo");
+			iprintf("\x1b[007;00HL: PAUSA");
+			cambiarFondo();
+			ESTADO = JUEGO;
 		} break;
 	}
 }

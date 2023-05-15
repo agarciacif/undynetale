@@ -17,7 +17,7 @@ definiciones.h
 
 //registros del teclado
 #define TECLAS_DAT	(*(vu16*)0x4000130) //registro de datos del teclado
-#define TECLAS_CNT	(*(vu16*)0x0040000) //registro de control del teclado
+#define TECLAS_CNT	(*(vu16*)0x4000132) //registro de control del teclado
 
 //registros del temporizador Timer0
 #define TIMER0_CNT   (*(vuint16*)0x04000102) //registro de control del temporizador
