@@ -18,7 +18,6 @@ int dif;
 void RutAtencionTeclado ()
 {	
 	int tecla = TeclaPulsada();
-	MostrarRomboGrande(tecla, 20,20); //DEBUG
 	switch (tecla)
 	{
 	case START:

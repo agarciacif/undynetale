@@ -54,13 +54,13 @@ touchPosition PANT_DAT;
 #define LIMY 191  
 #define PlayerID 99 //Identificador del sprite de jugador
 #define VIDAS 3 //El numero de vidas que tendrá el jugador
-struct Bala
+struct Bala //La estructura de datos Bala
 {
-	int index;
-	int posX;
+	int index; //indice individual en cada bala para sprites
+	int posX; 
 	int posY;
-	int viva;
-	int ubi;
+	int viva; //Si la bala ha sido disparada/es visible o no
+	int ubi; //el "carril" (Norte, Sur, Este, Oeste) que  corresponde a la bala
 };
 
 extern int ESTADO; //Estado del juego
@@ -70,6 +70,6 @@ extern int vidasJugador; //Las vidas del jugador
 extern int X; //PlayerX
 extern int Y;//PlayerY
 
-extern int dif;
-extern int cont;
+extern int dif; //La "dificultad"
+extern int cont; //el contador para aumentar dificultad
 extern int tick;

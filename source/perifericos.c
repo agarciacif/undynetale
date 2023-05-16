@@ -108,6 +108,7 @@ void PararTempo()
 	TIMER0_CNT&=0xFF7F;
 	
 }
+//Comprobar si la pantalla táctil se ha tocado.
 int tactilTocada(){
 	touchPosition pos_Pantalla;
 	touchRead(&pos_Pantalla);

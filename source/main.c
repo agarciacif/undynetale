@@ -15,18 +15,15 @@ y en otro ejemplo de Jaeden Ameronen
 #include "sprites.h"
 #include "juego.h"
 
-int X,Y;
 //---------------------------------------------------------------------------------
 int main(void) {
 //---------------------------------------------------------------------------------
 	EstablecerPaletaPrincipal();
 	inicializarGraficosSprites();
 	HabilitarInterrupciones();
-	X = 120;
-	Y = 88;
+	
 	// llamada al juego que vosotros programaréis
 	juego();
-
 	return(0);
 
 }
