@@ -48,6 +48,8 @@ void RutAtencionTeclado ()
 		if (ESTADO == JUEGO)
 		{
 			consoleClear();
+			iprintf("\x1b[01;00HPAUSA");
+			iprintf("\x1b[02;00HPULSA R PARA SEGUIR O START PARA VOLVER AL MENU");
 			visualizarPausa();
 			ESTADO = PAUSA;
 		} 

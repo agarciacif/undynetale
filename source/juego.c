@@ -92,11 +92,6 @@ void juego()
     		}
 		}
 		
-		if(ESTADO == PAUSA){
-
-			iprintf("\x1b[01;00HPAUSA");
-			iprintf("\x1b[02;00HPULSA R PARA SEGUIR O START PARA VOLVER AL MENU");
-		}
 		if (ESTADO == MUERTE)
 		{
 			iprintf("\x1b[01;00HHAS MUERTO");
