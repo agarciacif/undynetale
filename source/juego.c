@@ -28,7 +28,7 @@ void juego()
 	
 	ConfigurarTeclado(LRInterr); // Configurar el teclado.
 	ConfigurarTeclado(StartInterr);
-	ConfigurarTemporizador(56798,  0x00C1); // Configurar el temporizador.
+	ConfigurarTemporizador(39321,  0x00C2); // Configurar el temporizador.
 	
 	EstablecerVectorInt(); // Habilitar interrupciones.
 	
