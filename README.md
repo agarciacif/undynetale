@@ -1,10 +1,50 @@
-# Undynetale
- Mi juego para Estructura de computadores 22-23.
- Consiste en una recreación del minijuego de pelea contra Undyne del juego Undertale.
- En un punto de la pelea contra este personaje, este te colorea de verde y te cambia la mecánica de juego.
- Tu "personaje" ahora tiene una posición fija y debe colocar un escudo en la dirección donde se encuentren los proyectiles enemigos para bloquearlos.
- He tratado de recrear este minijuego, cambiando algunos aspectos para adaptarlo al hardware de la Nintendo DS y al contexto de tratarse de un juego independiente.
- El minijuego no tiene final, y la "dificultad" aumenta progresivamente mediante la velocidad de los proyectiles enemigos y jugador dispone de 3 vidas antes de que finalize la partida.
+# Undynetale DS Port
+<p align="center">
+  <br/>
+  <img src="https://github.com/user-attachments/assets/74939bc4-212b-4ecd-9cdc-dd5d0ec4672e" alt="drawing" width="550"/>
+</p>
+This project is a recreation of the Undyne minigame from the popular indie RPG Undertale, ported to the original Nintendo DS hardware. Developed in C using DevKitPro, this port brings the intense, spear-dodging action of the Undyne battle to a classic handheld console. The game is now playable directly in web browsers thanks to the Desmond emulator. This project was completed for the 'Computer Structure' class as part of the Computer Science degree program in Donostia.
 
- Toda la información del proyecto se haya en la 'MEMORIA JUEGO NDS.pdf'.
- 
+## Play Online
+You can play Undynetale directly in your web browser:
+[Undynetale by AgusZ02](https://agusz02.github.io/Undynetale/)
+
+## Gameplay
+In this minigame:
+
+- You face off against Undyne in a battle where fleeing is not an option.
+- Your goal is to deflect incoming projectiles that will approach from all directions.
+- Use the D-pad (or equivalent controls in the web emulator) to choose which direction to guard in the Battle Box.
+- Successfully blocking spears prevents damage.
+- The difficulty increases as the projectiles speed up over time.
+
+## Technical Details
+- **Original Platform**: Nintendo DS
+- **Emulation**: Desmond JavaScript Emulator
+- **Language**: C (original development)
+- **Development Tools**: DevKitPro
+- **Hosting**: GitHub Pages
+
+## Controls
+When playing in the web emulator:
+
+- **Arrow keys**: Guard in the corresponding direction
+- **Enter key** as Start
+- **Delete key** as Pause
+
+## Running Locally
+To run the game locally using the Desmond emulator:
+
+1. Download the ROM from the Releases tab
+2. Load it in any DS emulator
+
+## Credits
+- Original game "Undertale" by Toby Fox
+- DS Port developed by AgusZ02
+- [Desmond JavaScript Emulator](https://github.com/js-emulators/desmond)
+
+## License
+This project is [CC BY-NC 4.0](https://creativecommons.org/licenses/by-nc/4.0/deed) licensed.
+
+## Disclaimer
+This is a fan-made port and is not affiliated with or endorsed by Toby Fox or the official Undertale game.
