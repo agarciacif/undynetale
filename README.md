@@ -8,7 +8,7 @@ This project is a recreation of the Undyne minigame from the popular indie RPG U
 ## Play Online
 The game does not work on smartphone browser due to emulator limitations. Please use a computer.
 You can play Undynetale directly in your web browser:
-[Undynetale by AgusZ02](https://agusz02.github.io/Undynetale/)
+[Undynetale by AgusZ02](https://agusz02.github.io/undynetale/)
 
 ## Gameplay
 In this minigame:
