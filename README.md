@@ -6,6 +6,7 @@
 This project is a recreation of the Undyne minigame from the popular indie RPG Undertale, ported to the original Nintendo DS hardware. Developed in C using DevKitPro, this port brings the intense, spear-dodging action of the Undyne battle to a classic handheld console. The game is now playable directly in web browsers thanks to the Desmond emulator. This project was completed for the 'Computer Structure' class as part of the Computer Science degree program in Donostia.
 
 ## Play Online
+The game does not work on smartphone browser due to emulator limitations. Please use a computer.
 You can play Undynetale directly in your web browser:
 [Undynetale by AgusZ02](https://agusz02.github.io/Undynetale/)
 
